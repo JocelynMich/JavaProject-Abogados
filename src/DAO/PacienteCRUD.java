@@ -1,7 +1,10 @@
 package DAO;
 import Entidades.Paciente;
+
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+
 public class PacienteCRUD {
 
     public static void escribirArchivoPaciente(ArrayList<Paciente> lista) {
@@ -60,6 +63,13 @@ public class PacienteCRUD {
         ArrayList<Paciente> lista = leerArchivoPaciente();
         lista.removeIf(d -> d.getID().equals(paciente.getID()));
         escribirArchivoPaciente(lista);
+    }
+
+    public static void asignarIDPacienteCB(JComboBox<String> cmbIDPacienteC) {
+        ArrayList<Paciente> lista = leerArchivoPaciente();
+        for (Paciente a: lista) {
+            cmbIDPacienteC.addItem(a.getID());
+        }
     }
 
 }

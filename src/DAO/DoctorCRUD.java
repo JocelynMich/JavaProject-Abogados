@@ -3,6 +3,7 @@ package DAO;
 import Entidades.Doctor;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class DoctorCRUD {
     public static void escribirArchivo(ArrayList<Doctor> lista) {
@@ -46,7 +47,6 @@ public class DoctorCRUD {
     }
 
 
-
     public static Doctor buscarDoctorPorID(String ID) {
         ArrayList<Doctor> lista = leerArchivo();
         for (Doctor doctor : lista) {
@@ -59,13 +59,18 @@ public class DoctorCRUD {
         return null;
     }
 
-    public static void eliminarDoctor (Doctor doctor){
+    public static void eliminarDoctor(Doctor doctor) {
         ArrayList<Doctor> lista = leerArchivo();
         lista.removeIf(d -> d.getID().equals(doctor.getID()));
         escribirArchivo(lista);
-
     }
 
+    public static void asignarIDDoctorCB(JComboBox<String> cmbIDDoctorC) {
+        ArrayList<Doctor> lista = leerArchivo();
+        for (Doctor a : lista) {
+            cmbIDDoctorC.addItem(a.getID());
+        }
+    }
 }
 
 

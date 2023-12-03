@@ -4,10 +4,11 @@ import DAO.DoctorCRUD;
 import DAO.PacienteCRUD;
 import Entidades.Doctor;
 import Entidades.Paciente;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 
 public class Menu extends JFrame{
     private JPanel MiPanel;
@@ -70,9 +71,6 @@ public class Menu extends JFrame{
     private JTextField txtObservacionesC;
     private JLabel lblObservacionesC;
     private JLabel lblFechaC;
-    private JComboBox comboBox1;
-    private JComboBox cbMesC;
-    private JComboBox cbAnioC;
     private JButton btnCrearC;
     private JButton btnEditarC;
     private JButton btnBorrarC;
@@ -80,6 +78,17 @@ public class Menu extends JFrame{
     private JPanel PanDatosDC;
     private JPanel PanObservacionesC;
     private JPanel PanFechaC;
+    private JTextField txtNombreDC;
+    private JTextField txtNombrePC;
+    private JLabel lblNombreDC;
+    private JLabel lblNombrePC;
+    private JButton btnBuscarC;
+    private JLabel lblIDC;
+    private JTextField txtIDC;
+    private JTextField txtFechaC;
+    ArrayList<Doctor> listaD;
+    ArrayList<Paciente> listaP;
+
 
     //Metodo de Seleccionar en ComboBox de Doctor
     private void seleccionarMesEnComboBox(String mes) {
@@ -286,7 +295,14 @@ public class Menu extends JFrame{
             }
 
         });
+
+        //Mostrar las IDs de la lista de Doctor y Paciente en el ComboBox en las Consultas
+                DoctorCRUD crud= new DoctorCRUD();
+                PacienteCRUD crud1 = new PacienteCRUD();
+                crud1.asignarIDPacienteCB(cbPacienteID);
+                crud.asignarIDDoctorCB(cbDoctorID);
     }
+
 
     //Metodo de limpiar Formularios
     private void limpiarFormularioDoctor(){
