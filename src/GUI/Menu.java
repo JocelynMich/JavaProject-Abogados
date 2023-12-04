@@ -1,14 +1,17 @@
 package GUI;
 
+import DAO.CitaCRUD;
 import DAO.DoctorCRUD;
 import DAO.PacienteCRUD;
 import Entidades.Doctor;
 import Entidades.Paciente;
+import Entidades.Cita;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Menu extends JFrame{
     private JPanel MiPanel;
@@ -86,6 +89,9 @@ public class Menu extends JFrame{
     private JLabel lblIDC;
     private JTextField txtIDC;
     private JTextField txtFechaC;
+    private JComboBox cbDiaC;
+    private JComboBox cbMesC;
+    private JComboBox cbAnioC;
     ArrayList<Doctor> listaD;
     ArrayList<Paciente> listaP;
 
@@ -119,6 +125,16 @@ public class Menu extends JFrame{
     }
     private void seleccionarGeneroPEnComboBox(String GeneroP) {
         cbGeneroP.setSelectedItem(GeneroP);
+    }
+
+    //Metodo para Seleccionar en ComboBOX de Cita
+    private void seleccionarIDDoctor(String IDD) { cbDoctorID.setSelectedItem(IDD);}
+    private void seleccionarIDPaciente (String IDP) { cbDoctorID.setSelectedItem(IDP);
+    }
+    private void seleccionarDiaCita(String DiaC) { cbDiaC.setSelectedItem(DiaC);}
+    private void seleccionarMesCita (String MesC) { cbMesC.setSelectedItem(MesC);
+    }
+    private void seleccionarAnioCita (String AnioC) { cbAnioC.setSelectedItem(AnioC);
     }
 
     public Menu() {
@@ -298,11 +314,113 @@ public class Menu extends JFrame{
 
         //Mostrar las IDs de la lista de Doctor y Paciente en el ComboBox en las Consultas
                 DoctorCRUD crud= new DoctorCRUD();
+                crud.asignarIDDoctorCB(cbDoctorID);
                 PacienteCRUD crud1 = new PacienteCRUD();
                 crud1.asignarIDPacienteCB(cbPacienteID);
-                crud.asignarIDDoctorCB(cbDoctorID);
-    }
+        cbPacienteID.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idPacienteS = (String) cbPacienteID.getSelectedItem();
+                Paciente pacienteSeleccionado = PacienteCRUD.buscarPacientePorID(idPacienteS);
+                if (pacienteSeleccionado != null) {
+                    txtNombrePC.setText(pacienteSeleccionado.getNombre() + " "+ pacienteSeleccionado.getApellidoP() +" " + pacienteSeleccionado.getApellidoM());
+                } else {
+                    txtNombrePC.setText("");
+                }
+            }
+        });
 
+        cbDoctorID.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idDoctorS = (String) cbDoctorID.getSelectedItem();
+                Doctor doctorSeleccionado = DoctorCRUD.buscarDoctorPorID(idDoctorS);
+                if (doctorSeleccionado != null) {
+                    txtNombreDC.setText(doctorSeleccionado.getNombre() + " "+ doctorSeleccionado.getApellidoP() + " " + doctorSeleccionado.getApellidoM());
+                } else {
+                    txtNombreDC.setText("");
+                }
+            }
+        });
+        btnCrearC.addActionListener(new ActionListener() {
+            //Boton para crear citas
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fecha = cbDiaC.getSelectedItem().toString() + "/" + cbMesC.getSelectedItem().toString() + "/" + cbAnioC.getSelectedItem().toString();
+                boolean resultado = validarFecha(fecha);
+                if(resultado){
+                    JOptionPane.showMessageDialog(MiPanel,"La fecha esta bien");
+                    if (validarCamposCita()){
+                        Cita c = new Cita();
+                        c.setID(txtIDC.getText());
+                        String idDoctor= (String) cbDoctorID.getSelectedItem();
+                        c.setIDDoctor(idDoctor);
+                        String idPaciente= (String) cbPacienteID.getSelectedItem();
+                        c.setIDPaciente(idPaciente);
+                        c.setNombreDoctor(txtNombreDC.getText());
+                        c.setNombrePaciente(txtNombrePC.getText());
+                        c.setObservaciones(txtObservacionesC.getText());
+                        c.setFechaC(fecha);
+                        String diaC= (String) cbDiaC.getSelectedItem();
+                        c.setDiaC(diaC);
+                        String mesC= (String) cbMesC.getSelectedItem();
+                        c.setMesC(mesC);
+                        String anioC= (String) cbAnioC.getSelectedItem();
+                        c.setAnioC(anioC);
+                        limpiarFormularioCita();
+                    } else{
+                        JOptionPane.showMessageDialog(MiPanel, "Error en los campos de la cita");
+                    }
+                }else {
+                    JOptionPane.showMessageDialog(MiPanel, "Error en la fecha");
+                    txtFechaC.requestFocus();
+                }
+            }
+        });
+        btnBuscarC.addActionListener(new ActionListener() {
+            //Boton para buscar citas por ID
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CitaCRUD crud2 = new CitaCRUD();
+                String ID= txtIDC.getText();
+                Cita cita = crud2.buscarCitaPorID(ID);
+                if (cita==null){
+                    int respuesta=JOptionPane.showConfirmDialog(MiPanel, "No se encontro la cita por ID: " + ID+ "\n¿Deseas crear una cita?","Cita no Encontrada",JOptionPane.YES_NO_OPTION);
+                    if(respuesta==0){
+                        limpiarFormularioCita();
+                        btnBorrarC.setEnabled(false);
+                        btnEditarC.setEnabled(false);
+                        btnCrearC.setEnabled(true);
+                        txtObservacionesC.requestFocus();
+                    } else if(respuesta==1){
+                        limpiarFormularioCita();
+                    } else if(respuesta==-1){
+                        limpiarFormularioCita();
+                    }
+                } else {
+                    txtObservacionesC.setText(cita.getObservaciones());
+                    txtFechaC.setText(cita.getFechaC());
+                    String IDDC = cita.getIDDoctor();
+                    seleccionarIDDoctor(IDDC);
+                    String IDPC = cita.getIDPaciente();
+                    seleccionarIDPaciente(IDPC);
+                    txtNombreDC.setText(cita.getNombreDoctor());
+                    txtNombrePC.setText(cita.getNombrePaciente());
+                    txtObservacionesC.setText(cita.getObservaciones());
+                    txtFechaC.setText(cita.getFechaC());
+                    String DiaC = cita.getDiaC();
+                    seleccionarDiaCita(DiaC);
+                    String MesC = cita.getMesC();
+                    seleccionarMesCita(MesC);
+                    String AnioC= cita.getAnioC();
+                    seleccionarAnioCita(AnioC);
+                    btnBorrarC.setEnabled(true);
+                    btnEditarC.setEnabled(true);
+                    btnCrearC.setEnabled(false);
+                }
+            }
+        });
+    }
 
     //Metodo de limpiar Formularios
     private void limpiarFormularioDoctor(){
@@ -331,6 +449,19 @@ public class Menu extends JFrame{
         txtOMP.setText("");
     }
 
+    private void limpiarFormularioCita(){
+        //Hacerlo despues
+        cbDoctorID.setSelectedIndex(0);
+        cbPacienteID.setSelectedIndex(0);
+        txtNombreDC.setText("");
+        txtNombrePC.setText("");
+        txtObservacionesC.setText("");
+        txtFechaC.setText("");
+        cbDiaC.setSelectedIndex(0);
+        cbMesC.setSelectedIndex(0);
+        cbAnioC.setSelectedIndex(0);
+    }
+
     //Metodos de validarCampos
     public boolean validarCampos() {
         if (txtIDD.getText().isEmpty() || txtNombreD.getText().isEmpty()|| txtApellidoPD.getText().isEmpty() || txtApellidoMD.getText().isEmpty() || cbEspecialidadD.getSelectedIndex()==0||txtTelefonoD.getText().isEmpty()
@@ -353,6 +484,34 @@ public class Menu extends JFrame{
             return true;
         }
     }
+
+    public boolean validarCamposCita() {
+        if (txtIDC.getText().isEmpty()||cbDoctorID.getSelectedIndex()==0 || cbPacienteID.getSelectedIndex()==0 || txtNombreDC.getText().isEmpty() || txtNombrePC.getText().isEmpty()
+                || txtObservacionesC.getText().isEmpty() ||cbDiaC.getSelectedIndex()==0||cbMesC.getSelectedIndex()==0||cbAnioC.getSelectedIndex()==0 ) {
+            JOptionPane.showMessageDialog(MiPanel, "Hay una casilla vacia o con un valor invalido, cheque de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    //Metodos para Validar fechas
+    public boolean validarFecha(String fecha) {
+        try {
+            SimpleDateFormat formatoFecha =
+                    new SimpleDateFormat("dd/MM/yyyy");
+            formatoFecha.setLenient(false);
+            Date miFecha = formatoFecha.parse(fecha);
+            System.out.println(miFecha);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+
+
     public static void main(String[] args){
         Menu v= new Menu();
         v.setContentPane(v.MiPanel);

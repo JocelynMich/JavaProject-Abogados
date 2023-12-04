@@ -1,10 +1,50 @@
 package Entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cita {
-    String ID,IDDoctor,IDPaciente,observaciones;
-    Date fechaC;
+public class Cita implements Serializable {
+    String ID,IDDoctor,IDPaciente,nombreDoctor, nombrePaciente,observaciones,fechaC, diaC, mesC, anioC;
+
+    public String getDiaC() {
+        return diaC;
+    }
+
+    public void setDiaC(String diaC) {
+        this.diaC = diaC;
+    }
+
+    public String getMesC() {
+        return mesC;
+    }
+
+    public void setMesC(String mesC) {
+        this.mesC = mesC;
+    }
+
+    public String getAnioC() {
+        return anioC;
+    }
+
+    public void setAnioC(String anioC) {
+        this.anioC = anioC;
+    }
+
+    public String getNombreDoctor() {
+        return nombreDoctor;
+    }
+
+    public void setNombreDoctor(String nombreDoctor) {
+        this.nombreDoctor = nombreDoctor;
+    }
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
+    }
 
     public String getID() {
         return ID;
@@ -38,11 +78,11 @@ public class Cita {
         this.observaciones = observaciones;
     }
 
-    public Date getFechaC() {
+    public String getFechaC() {
         return fechaC;
     }
 
-    public void setFechaC(Date fechaC) {
+    public void setFechaC(String fechaC) {
         this.fechaC = fechaC;
     }
 }
