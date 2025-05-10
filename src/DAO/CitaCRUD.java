@@ -1,26 +1,41 @@
 package DAO;
 
 import Entidades.Cita;
+import Entidades.Cliente;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class CitaCRUD {
     public static void escribirArchivoCita(ArrayList<Cita> lista) {
         try {
-            FileOutputStream escribir =
-                    new FileOutputStream("C:\\evidenciajava\\listaCita.txt");
-            ObjectOutputStream miStream =
-                    new ObjectOutputStream(escribir);
+            String directorio = "C:\\evidenciajava";
+            String archivoRuta = directorio + "\\listaCita.txt";
+
+            File carpeta = new File(directorio);
+            if (!carpeta.exists()) {
+                boolean creada = carpeta.mkdirs();
+                if (creada) {
+                    System.out.println("Carpeta creada: " + directorio);
+                } else {
+                    System.out.println("No se pudo crear la carpeta: " + directorio);
+                }
+            }
+
+            FileOutputStream escribir = new FileOutputStream(archivoRuta);
+            ObjectOutputStream miStream = new ObjectOutputStream(escribir);
             miStream.writeObject(lista);
-            System.out.println("Datos de citas escritos correctamente.");
+            miStream.close();
+            System.out.println("Datos de citas escritos correctamente en " + archivoRuta);
 
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado");
         } catch (IOException e) {
             System.out.println("Error de E/S");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
+
 
     public static ArrayList<Cita> leerArchivoCita() {
         ArrayList<Cita> otraLista = new ArrayList<>();
@@ -60,6 +75,11 @@ public class CitaCRUD {
         return null;
     }
 
+    public static void eliminarCita (Cita cita){
+        ArrayList<Cita> lista = leerArchivoCita();
+        lista.removeIf(d -> d.getID().equals(cita.getID()));
+        escribirArchivoCita(lista);
+    }
 
 
 

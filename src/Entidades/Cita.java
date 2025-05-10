@@ -3,8 +3,10 @@ package Entidades;
 import java.io.Serializable;
 import java.util.Date;
 
+//Modificaciones en Citas
+
 public class Cita implements Serializable {
-    String ID,IDDoctor,IDPaciente,nombreDoctor, nombrePaciente,observaciones,fechaC, diaC, mesC, anioC;
+    String ID,IDAbogado,IDCliente,nombreAbogado,nombreCliente,observaciones,fechaC, diaC, mesC, anioC,especialidadAbogado;
 
     public String getDiaC() {
         return diaC;
@@ -30,20 +32,29 @@ public class Cita implements Serializable {
         this.anioC = anioC;
     }
 
-    public String getNombreDoctor() {
-        return nombreDoctor;
+    public String getNombreAbogado() {
+        return nombreAbogado;
     }
 
-    public void setNombreDoctor(String nombreDoctor) {
-        this.nombreDoctor = nombreDoctor;
+    public void setNombreAbogado(String nombreAbogado) {
+        this.nombreAbogado = nombreAbogado;
     }
 
-    public String getNombrePaciente() {
-        return nombrePaciente;
+
+    public String getNombreCliente() {
+        return nombreCliente;
     }
 
-    public void setNombrePaciente(String nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getEspecialidadAbogado() {
+        return especialidadAbogado;
+    }
+
+    public void setEspecialidadAbogado(String especialidadAbogado) {
+        this.especialidadAbogado = especialidadAbogado;
     }
 
     public String getID() {
@@ -54,21 +65,26 @@ public class Cita implements Serializable {
         this.ID = ID;
     }
 
-    public String getIDDoctor() {
-        return IDDoctor;
+
+    public void setIDAbogado(String IDAbogado) {
+        this.IDAbogado = IDAbogado;
     }
 
-    public void setIDDoctor(String IDDoctor) {
-        this.IDDoctor = IDDoctor;
+    public String getIDAbogado() {
+        return IDAbogado;
     }
 
-    public String getIDPaciente() {
-        return IDPaciente;
+
+
+    public String getIDCliente() {
+        return IDCliente;
     }
 
-    public void setIDPaciente(String IDPaciente) {
-        this.IDPaciente = IDPaciente;
+
+    public void setIDCliente(String IDCliente) {
+        this.IDCliente = IDCliente;
     }
+
 
     public String getObservaciones() {
         return observaciones;
@@ -77,6 +93,7 @@ public class Cita implements Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
 
     public String getFechaC() {
         return fechaC;
