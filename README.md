@@ -31,3 +31,20 @@ Se desarrolló una solución en Java con interfaz gráfica (GUI) y persistencia 
 [DAO (AbogadoCRUD.java, CitaCRUD.java, ClienteCRUD.java)]
 |
 [Archivos de Texto con datos almacenados]
+
+### Requerimientos
+
+- **Java**: Java SE 11 o superior
+- **IDE recomendado**: IntelliJ IDEA o Eclipse
+- **JUnit**: Versión 5 para pruebas
+- **Sistema operativo**: Windows, Linux o Mac
+- **Dependencias**:
+  - `junit-jupiter-api`
+  - `junit-jupiter-engine`
+    
+### Instalación
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/usuario/proyecto-abogados.git
+cd proyecto-abogados
