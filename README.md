@@ -1,24 +1,24 @@
 # Sistema de Gestión de Citas para Abogados
 
 ## Tabla de Contenidos
-- [Descripción](#-descripción)
-- [Problema Identificado](#-problema-identificado)
-- [Solución](#-solución)
-- [Arquitectura](#-arquitectura)
-- [Requerimientos](#-requerimientos)
-- [Instalación](#-instalación)
-- [Configuración](#-configuración)
-- [Uso](#-uso)
-- [Contribución](#-contribución)
-- [Roadmap](#-roadmap)
-
-### Descripción
+- [Descripción](#descripcion)
+- [Problema Identificado](#problema-identificado)
+- [Solución](#solucion)
+- [Arquitectura](#arquitectura)
+- [Requerimientos](#requerimientos)
+- [Instalacion](#instalacion)
+-[Configuracion](#configuracion)
+- [Uso](#uso)
+- [Contribucion](#contribucion)
+- [Roadmap](#roadmap)
+  
+### Descripcion
 Este proyecto es una aplicación Java para la gestión de citas de un buffet de abogados. Permite registrar, buscar y eliminar abogados, así como manejar la información necesaria para agendar citas con usuarios. 
 
 ### Problema Identificado
 Los abogados no contaban con una herramienta digital que facilitara la gestión de citas, datos de los clientes y la información de los profesionales del despacho. El registro manual causaba errores y pérdida de datos.
 
-### Solución
+### Solucion
 Se desarrolló una solución en Java con interfaz gráfica (GUI) y persistencia en archivos de texto para simplificar la gestión de citas y el registro de abogados.
 
 ### Arquitectura
@@ -42,12 +42,12 @@ Se desarrolló una solución en Java con interfaz gráfica (GUI) y persistencia 
   - `junit-jupiter-api`
   - `junit-jupiter-engine`
     
-### Instalación
+### Instalacion
 
 #### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/usuario/proyecto-abogados.git
-cd proyecto-abogados
+git clone https://github.com/JocelynMich/JavaProject-Abogados.git
+cd JavaProject-Abogados
 ```
 
 #### 2. Configurar el entorno
@@ -64,6 +64,7 @@ cd proyecto-abogados
 -Guarda los JArs descargados en una carpeta dentro de la raiz del proyecto y agregalos como dependencia en la estructura del proyecto.
 
 #### 3. Ejecutar pruebas manualmente
+
 Desde tu IDE, haz clic derecho sobre el archivo de tests que quieras ejecutar (AbogadoTest.java, ClienteTest.java y CitaTest.java) y selecciona Run.
 
 #### 4. Despliegue en producción
@@ -72,7 +73,7 @@ Hay dos formas de ejecutar el programa en la etapa de producción:
 - En ambiente local: Ejecutar desde el .jar generado por tu IDE.
 - En la nube: Subir el jar a un contenedor java y definir el comando para ejecutarlo.
 
-### Configuración
+### Configuracion
 
 #### Archivos de configuración
     listaAbogado.txt: Archivo de texto con la información de abogados.
@@ -80,6 +81,7 @@ Hay dos formas de ejecutar el programa en la etapa de producción:
     listaCita.txt: Archivo de texto con la información de las citas.
 
 #### Configuración de requerimientos
+
 Tener la version Java 11 minimo instalada e instalar las líbrerias de JUnit en caso de correr las tests de cada Entidad
 
 ### Uso
@@ -93,13 +95,13 @@ Tener la version Java 11 minimo instalada e instalar las líbrerias de JUnit en 
     Pueden acceder a todas las funciones del CRUD para cada entidad (Abogados, Clientes y Cita).
     También pueden modificar la estructura del archivo de persistencia (listaAbogado.txt) en caso de emergencias.
 
-### Contribución
+### Contribucion
 
 En caso de querer contribuir en el proyecto los pasos son:
 
 #### Clona el repositorio:
 ```bash
-git clone https://github.com/usuario/proyecto-abogados.git
+git clone [https://github.com/usuario/proyecto-abogados.git](https://github.com/JocelynMich/JavaProject-Abogados.git)
 ```
 #### Crea una nueva rama:
 ```bash
