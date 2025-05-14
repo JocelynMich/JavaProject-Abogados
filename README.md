@@ -1,5 +1,17 @@
 # Sistema de Gestión de Citas para Abogados
 
+## Tabla de Contenidos
+- [Descripción](#-descripción)
+- [Problema Identificado](#-problema-identificado)
+- [Solución](#-solución)
+- [Arquitectura](#-arquitectura)
+- [Requerimientos](#-requerimientos)
+- [Instalación](#-instalación)
+- [Configuración](#-configuración)
+- [Uso](#-uso)
+- [Contribución](#-contribución)
+- [Roadmap](#-roadmap)
+
 ### Descripción: 
 Este proyecto es una aplicación Java para la gestión de citas de un buffet de abogados. Permite registrar, buscar y eliminar abogados, así como manejar la información necesaria para agendar citas con usuarios. 
 
