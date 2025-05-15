@@ -13,7 +13,7 @@ public class ClienteTest {
 
     @Test
     @Order(1)
-    void testInsertarYBuscarAbogado() {
+    void testInsertarYBuscarCliente() {
         Cliente cliente = new Cliente();
         cliente.setID(TEST_ID);
         cliente.setNombre("Test");
