@@ -61,7 +61,7 @@ cd JavaProject-Abogados
   - opentest4j
   - junit-platform-commons
   - junit-platform-engine
--Guarda los JArs descargados en una carpeta dentro de la raiz del proyecto y agregalos como dependencia en la estructura del proyecto.
+- Guarda los JARs descargados en una carpeta dentro de la raiz del proyecto y agregarlos como dependencias en la estructura del proyecto.
 
 #### 3. Ejecutar pruebas manualmente
 
